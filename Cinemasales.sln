@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinemasales", "Cinemasales\Cinemasales.csproj", "{61394387-07B8-47A8-BE4E-352EFFC3AA28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{693BA279-5BE6-422F-BC84-CEE755761B9F}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookSeat", "BookSeat\BookSeat.csproj", "{C8299B5F-9A6E-40BE-8681-0F4DF0A7621A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletPay", "WalletPay\WalletPay.csproj", "{54275E02-37EF-4C80-AFBE-8793C70EAD9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61394387-07B8-47A8-BE4E-352EFFC3AA28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61394387-07B8-47A8-BE4E-352EFFC3AA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61394387-07B8-47A8-BE4E-352EFFC3AA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61394387-07B8-47A8-BE4E-352EFFC3AA28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8299B5F-9A6E-40BE-8681-0F4DF0A7621A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8299B5F-9A6E-40BE-8681-0F4DF0A7621A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8299B5F-9A6E-40BE-8681-0F4DF0A7621A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8299B5F-9A6E-40BE-8681-0F4DF0A7621A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54275E02-37EF-4C80-AFBE-8793C70EAD9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54275E02-37EF-4C80-AFBE-8793C70EAD9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54275E02-37EF-4C80-AFBE-8793C70EAD9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54275E02-37EF-4C80-AFBE-8793C70EAD9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DCDA8811-8B21-4CF9-98A8-B9778B861EED}
+	EndGlobalSection
+EndGlobal
