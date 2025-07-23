@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  cinemasales:
+    build:
+      context: "F:\\IT projects\\programms\\Cinemasales"
+      dockerfile: "Cinemasales/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Cinemasales.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "cinemasales_image:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\Dzetsu\\.nuget\\packages:/home/app/.nuget/packages"
+    - "F:\\IT projects\\programms\\Cinemasales\\Cinemasales:/app:rw"
+    - "F:\\IT projects\\programms\\Cinemasales:/src:rw"
+    working_dir: "/app"
