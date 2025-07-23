@@ -2,13 +2,14 @@ namespace Cinemasales.Entities;
 
 public class Result
 {
-    public int Id { get; set; }
-    public string Token { get; set; }
-    public short PayStatus { get; set; }
-    public short BookStatus { get; set; }
-    public short ResultStatus { get; set; }
-    public string SeatNumber { get; set; }
-    public string Username { get; set; }
-    public int Cost { get; set; }
-    public string Pincode { get; set; }
+    public int Id { get; init; }
+    public string Token { get; init; }
+    public short PayStatus { get; init; }
+    
+    public short BookStatus { get; init; }
+    public short ResultStatus { get; init; }
+    public string SeatNumber { get; init; }
+    public string Username { get; init; }
+    public int Cost { get; init; }
+    public string Pincode { get; init; }
 }

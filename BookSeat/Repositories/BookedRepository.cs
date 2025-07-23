@@ -6,40 +6,30 @@ namespace BookSeat.Repositories;
 
 public class BookedRepository(NpgsqlDataSource dataSource) : IBookedRepository
 {
-    public async Task<bool> Update(BookInfo query)
+    private const string SelectStatusQuery = """
+                                         SELECT status 
+                                         FROM booked_seats.all_seats
+                                         WHERE number = @number 
+                                         """;
+
+    private const string UpdateSeatStatus = """
+                                            UPDATE booked_seats.all_seats
+                                            SET status = @status 
+                                            WHERE number = @number 
+                                            """;
+    public async Task UpdateSeat(BookQuery query, short status)
     {
-        var connection = await dataSource.OpenConnectionAsync();
+        await using var connection = await dataSource.OpenConnectionAsync();
         
-        const string selectIdQuery = """
-                                     SELECT id, status 
-                                     FROM booked_seats.all_seats
-                                     WHERE number = @number 
-                                     """;
-        const string updateSeatStatus = """
-                                    UPDATE booked_seats.all_seats
-                                    SET status = @status 
-                                    WHERE id = @id
-                                    """;
-
-        SeatInfo seat = (await connection.QuerySingleOrDefaultAsync<SeatInfo>(selectIdQuery, new { number = query.SeatNumber }))!;
-
-        switch (seat.Status)
-        {
-            case 0 when query.Answer == 1:
-                return false;
-            case 0 when query.Answer == 0:
-                await connection.ExecuteAsync(updateSeatStatus, new { id = seat.Id, status = 1 });
-                break;
-            case 1 when query.Answer == 1:
-                await connection.ExecuteAsync(updateSeatStatus, new { id = seat.Id, status = 0 });
-                break;
-        }
-        return true;
+        await connection.ExecuteAsync(UpdateSeatStatus, new { number = query.SeatNumber, status });
     }
-}
 
-class SeatInfo
-{
-    public int Id { get; set; }
-    public short Status { get; set; }
+    public async Task<short> GetSeatStatus(BookQuery query)
+    {
+        await using var connection = await dataSource.OpenConnectionAsync();
+        
+        var status = (await connection.QuerySingleOrDefaultAsync<short>(SelectStatusQuery, new { number = query.SeatNumber }))!;
+
+        return status;
+    }
 }

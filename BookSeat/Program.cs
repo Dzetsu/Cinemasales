@@ -1,15 +1,19 @@
-﻿using BookSeat;
-using BookSeat.Repositories;
-using BookSeat.Services;
-using BookSeat.Services.BackgroundService;
-using BookSeat.Services.Kafka;
+﻿using BookSeat.Repositories;
+using BookSeat.Services.BackgroundServices;
+using BookSeat.Services.BookedServices;
+using BookSeat.Services.KafkaServices;
+using Cinemasales.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ConsumerKafkaSettings = BookSeat.Settings.ConsumerKafkaSettings;
+using ProducerKafkaSettings = BookSeat.Settings.ProducerKafkaSettings;
 
-class Program
+namespace BookSeat;
+
+internal static class Program
 {
-    static async Task Main()
+    private static async Task Main()
     {
         var builder = WebApplication.CreateBuilder();
         
@@ -19,10 +23,11 @@ class Program
         builder.Services.AddSingleton<IBookedRepository, BookedRepository>();
         builder.Services.AddSingleton<IBookedService, BookedService>();
         builder.Services.AddSingleton<BookedProducer>();
+        builder.Services.Configure<ConsumerKafkaSettings>(builder.Configuration.GetSection("ConsumerConfig"));
+        builder.Services.Configure<ProducerKafkaSettings>(builder.Configuration.GetSection("ProducerConfig"));
         
         var app = builder.Build();
         
         await app.RunAsync();
     }
 }
-

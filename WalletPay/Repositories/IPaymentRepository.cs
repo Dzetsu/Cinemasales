@@ -2,4 +2,4 @@ using WalletPay.Entities;
 
 namespace WalletPay.Repositories;
 
-public interface IPaymentRepository : IRepository<PayInfo>;
+public interface IPaymentRepository : IRepository<PayQuery>;

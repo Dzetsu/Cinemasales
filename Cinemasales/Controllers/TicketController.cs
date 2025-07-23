@@ -1,5 +1,6 @@
 using Cinemasales.Entities;
 using Cinemasales.Services;
+using Cinemasales.Services.TicketServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cinemasales.Controllers;

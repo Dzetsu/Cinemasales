@@ -2,9 +2,9 @@
   broker:
     image: apache/kafka:latest
     hostname: broker
-    container_name: kafkaBroker
+    container_name: cinemasales_kafka
     ports:
-      - 9092:9092
+      - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,CONTROLLER:PLAINTEXT
@@ -21,3 +21,40 @@
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+  cinemasales:
+    image: cinemasales_image
+    build:
+      context: .
+      dockerfile: Cinemasales/Dockerfile
+      
+  postgres:
+    image: postgres:latest
+    container_name: cinemasales_postgres
+    hostname: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    restart: always
+    
+  liquibase:
+    image: liquibase/liquibase
+    volumes:
+      - ./liquibase/:/liquibase/changelog/
+    depends_on:
+      - postgres
+    command:
+      [
+        "--url=jdbc:postgresql://postgres:5432/postgres",
+        "--username=postgres",
+        "--password=postgres",
+        "--searchPath=/liquibase/changelog/",
+        "--changeLogFile=changelog.xml",
+        "update"
+      ]
+    
+volumes:
+  pg_data:
